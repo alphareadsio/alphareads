@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book - AlphaReads</title>
+    <meta name="description" content="Financial & Self-Help Audiobook">
+    <meta name="og:type" content="article">
+    <meta name="og:image" content="https://covers.openlibrary.org/b/id/8315603-M.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0A0A0F;
+            color: #FFFFFF;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #F5A623 0%, #1a1a2e 100%);
+            padding: 20px;
+            border-bottom: 2px solid #F5A623;
+        }
+
+        header a {
+            color: #F5A623;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .book-detail {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .book-cover-large {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #F5A623;
+            box-shadow: 0 10px 40px rgba(245, 166, 35, 0.2);
+        }
+
+        .book-cover-large img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .book-info h1 {
+            font-size: 2.2em;
+            color: #F5A623;
+            margin-bottom: 10px;
+        }
+
+        .book-author {
+            font-size: 1.2em;
+            color: #AAAAAA;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+        }
+
+        .book-summary {
+            font-size: 1em;
+            color: #CCCCCC;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .audio-player {
+            margin: 30px 0;
+            background: #1a1a2e;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #F5A623;
+        }
+
+        .audio-player h3 {
+            color: #F5A623;
+            margin-bottom: 15px;
+        }
+
+        audio {
+            width: 100%;
+            height: 50px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #F5A623;
+            color: #000;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background: #FFB84D;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: #333;
+            color: #F5A623;
+            border: 1px solid #F5A623;
+        }
+
+        .btn-secondary:hover {
+            background: #444;
+        }
+
+        .book-metadata {
+            background: #1a1a2e;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            margin-top: 30px;
+        }
+
+        .metadata-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .metadata-row:last-child {
+            border-bottom: none;
+        }
+
+        .metadata-label {
+            color: #F5A623;
+            font-weight: bold;
+        }
+
+        .metadata-value {
+            color: #CCCCCC;
+            text-align: right;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid #F5A623;
+            color: #AAAAAA;
+            font-size: 0.9em;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .book-detail {
+                grid-template-columns: 1fr;
+            }
+
+            .book-info h1 {
+                font-size: 1.8em;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="./index.html">← Back to AlphaReads</a>
+    </header>
+
+    <div class="container">
+        <div class="book-detail">
+            <div>
+                <div class="book-cover-large">
+                    <img id="bookCover" src="" alt="Book Cover">
+                </div>
+            </div>
+
+            <div class="book-info">
+                <h1 id="bookTitle"></h1>
+                <p class="book-author">by <span id="bookAuthor"></span></p>
+                
+                <div class="book-summary" id="bookDescription"></div>
+
+                <div class="audio-player">
+                    <h3>🎧 Listen to Sample</h3>
+                    <audio id="audioPlayer" controls>
+                        <source src="" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn btn-primary" id="buyBtn" onclick="">🛒 Buy on Amazon</button>
+                    <button class="btn btn-secondary" onclick="shareBook()">📤 Share</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-metadata">
+            <div class="metadata-row">
+                <span class="metadata-label">Publisher</span>
+                <span class="metadata-value" id="publisher">—</span>
+            </div>
+            <div class="metadata-row">
+                <span class="metadata-label">Format</span>
+                <span class="metadata-value">Audiobook</span>
+            </div>
+            <div class="metadata-row">
+                <span class="metadata-label">Language</span>
+                <span class="metadata-value">English</span>
+            </div>
+            <div class="metadata-row">
+                <span class="metadata-label">Source</span>
+                <span class="metadata-value"><a href="#" id="amazonLink" style="color: #F5A623;">Amazon</a></span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 AlphaReads. All rights reserved. | <a href="#" style="color: #F5A623;">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        const books = [
+            {
+                id: 1,
+                title: "The Bitcoin Standard",
+                author: "Saifedean Ammous",
+                description: "A comprehensive look at Bitcoin's economic principles and how it challenges traditional currency systems. This book delves deep into the history of money, from ancient barter systems to modern fiat currencies, explaining why Bitcoin represents a revolutionary shift in how we think about value, inflation, and financial freedom. Perfect for anyone interested in cryptocurrency and economic theory.",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                amazonUrl: "https://amzn.to/4sCFJ4C",
+                coverUrl: "https://covers.openlibrary.org/b/id/10320866-M.jpg",
+                publisher: "Wiley"
+            },
+            {
+                id: 2,
+                title: "Rich Dad Poor Dad",
+                author: "Robert Kiyosaki",
+                description: "The classic guide to building wealth and financial independence through real estate and entrepreneurship. Robert Kiyosaki contrasts the financial philosophies of his two fathers—his biological father (Poor Dad) and his friend's father (Rich Dad)—to illustrate key principles of wealth building. Learn why financial education is crucial, how to leverage assets, and why the wealthy think differently about money.",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                amazonUrl: "https://amzn.to/4s0FBeb",
+                coverUrl: "https://covers.openlibrary.org/b/id/8315603-M.jpg",
+                publisher: "Warner Business Books"
+            },
+            {
+                id: 3,
+                title: "The DeFi Revolution",
+                author: "Camila Russo",
+                description: "Explore decentralized finance and how blockchain is transforming traditional banking and investing. This book covers DeFi protocols, yield farming, staking, and how smart contracts are disrupting finance. Essential reading for understanding the future of money and finance in the blockchain era.",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                amazonUrl: "https://amzn.to/4tctJqo",
+                coverUrl: "https://covers.openlibrary.org/b/id/11234567-M.jpg",
+                publisher: "PublicAffairs"
+            },
+            {
+                id: 4,
+                title: "Atomic Habits",
+                author: "James Clear",
+                description: "Transform your life with tiny, incremental changes. The science of habit formation and personal growth. James Clear reveals practical strategies for developing good habits, breaking bad ones, and mastering the small behaviors that lead to remarkable results. This book is perfect for anyone looking to improve their productivity, health, and success.",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+                amazonUrl: "https://www.amazon.com/dp/0735211299?tag=alphareadsio-20",
+                coverUrl: "https://covers.openlibrary.org/b/id/12539702-M.jpg",
+                publisher: "Avery"
+            },
+            {
+                id: 5,
+                title: "The Intelligent Investor",
+                author: "Benjamin Graham",
+                description: "The definitive guide to value investing. Learn the principles that made Warren Buffett a billionaire. Benjamin Graham's timeless wisdom on how to invest with a margin of safety, analyzing companies for intrinsic value, and building long-term wealth. A must-read for anyone serious about investing.",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+                amazonUrl: "https://www.amazon.com/dp/0060555661?tag=alphareadsio-20",
+                coverUrl: "https://covers.openlibrary.org/b/id/36434-M.jpg",
+                publisher: "Harper Business"
+            },
+            {
+                id: 6,
+                title: "The Psychology of Money",
+                author: "Morgan Housel",
+                description: "Learn how psychology drives financial decisions. Understand yourself and others better with money. Morgan Housel explores how our emotions, biases, and behaviors influence our financial choices, from spending and saving to investing and taking risks. Perfect for anyone wanting to improve their relationship with money.",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+                amazonUrl: "https://www.amazon.com/dp/0857197681?tag=alphareadsio-20",
+                coverUrl: "https://covers.openlibrary.org/b/id/10389354-M.jpg",
+                publisher: "Harriman House"
+            }
+        ];
+
+        function getBookIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return parseInt(params.get('id')) || 1;
+        }
+
+        function loadBook() {
+            const bookId = getBookIdFromUrl();
+            const book = books.find(b => b.id === bookId);
+
+            if (!book) {
+                document.body.innerHTML = '<div style="text-align: center; padding: 40px; color: #FFF;">Book not found</div>';
+                return;
+            }
+
+            // Update page meta tags
+            document.title = `${book.title} - AlphaReads`;
+            document.querySelector('meta[name="description"]').content = book.description.substring(0, 160);
+            document.querySelector('meta[name="og:image"]').content = book.coverUrl;
+
+            // Update book details
+            document.getElementById('bookTitle').textContent = book.title;
+            document.getElementById('bookAuthor').textContent = book.author;
+            document.getElementById('bookDescription').textContent = book.description;
+            document.getElementById('bookCover').src = book.coverUrl;
+            document.getElementById('bookCover').alt = book.title;
+            document.getElementById('publisher').textContent = book.publisher;
+            document.getElementById('audioPlayer').src = book.audioUrl;
+            document.getElementById('amazonLink').href = book.amazonUrl;
+            document.getElementById('buyBtn').onclick = function() {
+                window.open(book.amazonUrl, '_blank');
+            };
+        }
+
+        function shareBook() {
+            const bookId = getBookIdFromUrl();
+            const book = books.find(b => b.id === bookId);
+            const url = `${window.location.origin}/book.html?id=${bookId}`;
+            const text = `Check out "${book.title}" by ${book.author} on AlphaReads 📚`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: book.title,
+                    text: text,
+                    url: url
+                }).catch(err => console.log('Share cancelled'));
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(url);
+                alert('Link copied to clipboard!');
+            }
+        }
+
+        // Load book on page load
+        document.addEventListener('DOMContentLoaded', loadBook);
+    </script>
+</body>
+</html>
