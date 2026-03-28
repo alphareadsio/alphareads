@@ -36,14 +36,6 @@
             color: #CCCCCC;
         }
 
-        .header-image {
-            max-width: 100%;
-            height: auto;
-            margin-top: 20px;
-            border-radius: 8px;
-            max-height: 200px;
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -75,7 +67,7 @@
         .book-cover {
             width: 100%;
             height: 350px;
-            background: linear-gradient(135deg, #2a2a3e, #0A0A0F);
+            background: #0A0A0F;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -88,7 +80,6 @@
             height: 100%;
             object-fit: contain;
             padding: 10px;
-            background: #0A0A0F;
         }
 
         .book-content {
@@ -99,54 +90,63 @@
         }
 
         .book-title {
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: bold;
+            margin-bottom: 10px;
             color: #F5A623;
-            margin-bottom: 6px;
         }
 
         .book-author {
-            font-size: 0.95em;
+            font-size: 0.9em;
             color: #AAAAAA;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .book-description {
-            font-size: 0.9em;
-            color: #CCCCCC;
-            margin-bottom: 16px;
+            font-size: 0.85em;
+            color: #DDDDDD;
             flex: 1;
+            margin-bottom: 15px;
         }
 
         .audio-player {
-            margin-bottom: 16px;
+            margin-bottom: 15px;
         }
 
         audio {
             width: 100%;
-            height: 40px;
+            height: 30px;
         }
 
         .buttons {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap;
         }
 
         .btn {
             flex: 1;
-            padding: 10px 16px;
+            padding: 10px 15px;
             border: none;
             border-radius: 6px;
             font-size: 0.9em;
+            font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            font-weight: bold;
+        }
+
+        .btn-read-more {
+            background: #F5A623;
+            color: #0A0A0F;
+        }
+
+        .btn-read-more:hover {
+            background: #FFB84D;
+            transform: scale(1.05);
         }
 
         .btn-amazon {
-            background: #F5A623;
-            color: #000;
+            background: #FF9900;
+            color: #FFFFFF;
         }
 
         .btn-amazon:hover {
@@ -155,121 +155,134 @@
         }
 
         footer {
+            background: #1a1a2e;
+            padding: 20px;
             text-align: center;
-            padding: 30px 20px;
-            border-top: 1px solid #F5A623;
             color: #AAAAAA;
-            font-size: 0.9em;
+            border-top: 1px solid #F5A623;
+            margin-top: 40px;
         }
 
-        .affiliate-disclaimer {
-            background: rgba(245, 166, 35, 0.1);
-            border-left: 3px solid #F5A623;
-            padding: 15px;
-            margin: 30px 0;
-            border-radius: 4px;
+        footer a {
+            color: #F5A623;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>📚 AlphaReads</h1>
-        <p>Financial Freedom Through Knowledge</p>
+        <h1>🎙️ AlphaReads</h1>
+        <p>Financial & Self-Help Audiobooks</p>
+        <p style="font-size: 0.9em; margin-top: 10px; color: #AAAAAA;">📚 Listen to summaries | 📈 Build wealth | 💡 Learn better</p>
     </header>
 
     <div class="container">
-        <div class="affiliate-disclaimer">
-            <strong>🤝 AlphaReads Affiliate Partnership</strong><br>
-            We earn a commission when you purchase through our Amazon links at no extra cost to you.
-        </div>
+        <p style="text-align: center; color: #AAAAAA; margin-bottom: 30px;">
+            🤝 <strong>Affiliate Partnership</strong> — We earn a commission when you purchase through our Amazon links at no extra cost to you.
+        </p>
 
-        <div id="booksGrid" class="books-grid"></div>
+        <div class="books-grid" id="booksContainer"></div>
     </div>
 
     <footer>
-        <p>&copy; 2026 AlphaReads. All rights reserved. | <a href="#" style="color: #F5A623;">Privacy Policy</a></p>
+        <p>&copy; 2026 AlphaReads. All rights reserved. | <a href="/sitemap.xml">Sitemap</a></p>
     </footer>
 
     <script>
         const books = [
             {
                 id: 1,
-                title: "The Bitcoin Standard",
-                author: "Saifedean Ammous",
-                description: "A comprehensive look at Bitcoin's economic principles and how it challenges traditional currency systems.",
+                title: "Atomic Habits",
+                author: "James Clear",
+                description: "Transform your life with tiny changes. Learn how small habits compound into remarkable results.",
+                coverUrl: "https://covers.openlibrary.org/b/id/8315603-M.jpg",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                amazonUrl: "https://amzn.to/4sCFJ4C",
-                coverUrl: "https://covers.openlibrary.org/b/id/10320866-M.jpg"
+                amazonUrl: "https://amzn.to/4sCFJ4C"
             },
             {
                 id: 2,
                 title: "Rich Dad Poor Dad",
-                author: "Robert Kiyosaki",
-                description: "The classic guide to building wealth and financial independence through real estate and entrepreneurship.",
+                author: "Robert T. Kiyosaki",
+                description: "Discover the mindset differences between wealthy and poor people. Learn how to build real wealth.",
+                coverUrl: "https://covers.openlibrary.org/b/id/7759755-M.jpg",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-                amazonUrl: "https://amzn.to/4s0FBeb",
-                coverUrl: "https://covers.openlibrary.org/b/id/8315603-M.jpg"
+                amazonUrl: "https://amzn.to/4s0FBeb"
             },
             {
                 id: 3,
-                title: "The DeFi Revolution",
-                author: "Camila Russo",
-                description: "Explore decentralized finance and how blockchain is transforming traditional banking and investing.",
+                title: "The Bitcoin Standard",
+                author: "Saifedean Ammous",
+                description: "Understand sound money and the economics of Bitcoin. A must-read for any investor.",
+                coverUrl: "https://covers.openlibrary.org/b/id/8285635-M.jpg",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-                amazonUrl: "https://amzn.to/4tctJqo",
-                coverUrl: "https://covers.openlibrary.org/b/id/11234567-M.jpg"
+                amazonUrl: "https://amzn.to/4sCFJ4C"
             },
             {
                 id: 4,
-                title: "Atomic Habits",
-                author: "James Clear",
-                description: "Transform your life with tiny, incremental changes. The science of habit formation and personal growth.",
+                title: "The Intelligent Investor",
+                author: "Benjamin Graham",
+                description: "The bible of value investing. Learn timeless principles for building a successful investment portfolio.",
+                coverUrl: "https://covers.openlibrary.org/b/id/7903911-M.jpg",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
-                amazonUrl: "https://www.amazon.com/dp/0735211299?tag=alphareadsio-20",
-                coverUrl: "https://covers.openlibrary.org/b/id/12539702-M.jpg"
+                amazonUrl: "https://amzn.to/4tctJqo"
             },
             {
                 id: 5,
-                title: "The Intelligent Investor",
-                author: "Benjamin Graham",
-                description: "The definitive guide to value investing. Learn the principles that made Warren Buffett a billionaire.",
+                title: "The Psychology of Money",
+                author: "Morgan Housel",
+                description: "How to think about money differently. Master the behavioral side of investing and personal finance.",
+                coverUrl: "https://covers.openlibrary.org/b/id/10528432-M.jpg",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
-                amazonUrl: "https://www.amazon.com/dp/0060555661?tag=alphareadsio-20",
-                coverUrl: "https://covers.openlibrary.org/b/id/36434-M.jpg"
+                amazonUrl: "https://amzn.to/4tctJqo"
             },
             {
                 id: 6,
-                title: "The Psychology of Money",
-                author: "Morgan Housel",
-                description: "Learn how psychology drives financial decisions. Understand yourself and others better with money.",
+                title: "The DeFi Revolution",
+                author: "Farokh Sarmad",
+                description: "The future of finance is here. Learn how decentralized finance is transforming the financial landscape.",
+                coverUrl: "https://covers.openlibrary.org/b/id/9632838-M.jpg",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
-                amazonUrl: "https://www.amazon.com/dp/0857197681?tag=alphareadsio-20",
-                coverUrl: "https://covers.openlibrary.org/b/id/10389354-M.jpg"
+                amazonUrl: "https://amzn.to/4tctJqo"
             }
         ];
 
         function renderBooks() {
-            const grid = document.getElementById('booksGrid');
-            grid.innerHTML = books.map(book => `
+            const container = document.getElementById('booksContainer');
+            container.innerHTML = books.map(book => `
                 <div class="book-card">
                     <div class="book-cover">
-                        <img src="${book.coverUrl}" alt="${book.title}" loading="lazy">
+                        <img src="${book.coverUrl}" alt="${book.title}" onerror="this.src='https://via.placeholder.com/200x300?text=${encodeURIComponent(book.title)}'">
                     </div>
                     <div class="book-content">
                         <h2 class="book-title">${book.title}</h2>
                         <p class="book-author">by ${book.author}</p>
                         <p class="book-description">${book.description}</p>
-                        
                         <div class="audio-player">
                             <audio controls>
                                 <source src="${book.audioUrl}" type="audio/mpeg">
                                 Your browser does not support the audio element.
                             </audio>
                         </div>
-
                         <div class="buttons">
+                            <button class="btn btn-read-more" onclick="goToBook(${book.id})">
+                                📖 Read More
+                            </button>
                             <button class="btn btn-amazon" onclick="window.open('${book.amazonUrl}', '_blank')">
-                                📖 Buy on Amazon
+                                🛒 Buy
                             </button>
                         </div>
                     </div>
@@ -277,7 +290,10 @@
             `).join('');
         }
 
-        // Render on load
+        function goToBook(bookId) {
+            window.location.href = `book.html?id=${bookId}`;
+        }
+
         document.addEventListener('DOMContentLoaded', renderBooks);
     </script>
 </body>
