@@ -19,16 +19,23 @@
         }
 
         header {
-            background: linear-gradient(135deg, #F5A623 0%, #1a1a2e 100%);
-            padding: 40px 20px;
+            background: linear-gradient(135deg, #0D1B2A 0%, #1a1a2e 100%);
+            padding: 30px 20px;
             text-align: center;
-            border-bottom: 2px solid #F5A623;
+            border-bottom: 2px solid #1A8FE3;
+        }
+
+        .header-logo {
+            max-width: 320px;
+            height: auto;
+            margin: 0 auto 15px auto;
+            display: block;
         }
 
         header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            color: #F5A623;
+            color: #1A8FE3;
         }
 
         header p {
@@ -51,7 +58,7 @@
 
         .book-card {
             background: #1a1a2e;
-            border: 1px solid #F5A623;
+            border: 1px solid #1A8FE3;
             border-radius: 12px;
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
@@ -61,7 +68,7 @@
 
         .book-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(245, 166, 35, 0.2);
+            box-shadow: 0 10px 30px rgba(26, 143, 227, 0.25);
         }
 
         .book-cover {
@@ -72,7 +79,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            border-bottom: 1px solid #F5A623;
+            border-bottom: 1px solid #1A8FE3;
         }
 
         .book-cover img {
@@ -93,7 +100,7 @@
             font-size: 1.3em;
             font-weight: bold;
             margin-bottom: 10px;
-            color: #F5A623;
+            color: #1A8FE3;
         }
 
         .book-author {
@@ -135,22 +142,23 @@
         }
 
         .btn-read-more {
-            background: #F5A623;
-            color: #0A0A0F;
+            background: #1A8FE3;
+            color: #FFFFFF;
         }
 
         .btn-read-more:hover {
-            background: #FFB84D;
+            background: #3BA5F5;
             transform: scale(1.05);
         }
 
         .btn-amazon {
-            background: #FF9900;
+            background: #1A8FE3;
             color: #FFFFFF;
+            border: 1px solid #3BA5F5;
         }
 
         .btn-amazon:hover {
-            background: #FFB84D;
+            background: #3BA5F5;
             transform: scale(1.05);
         }
 
@@ -159,12 +167,12 @@
             padding: 20px;
             text-align: center;
             color: #AAAAAA;
-            border-top: 1px solid #F5A623;
+            border-top: 1px solid #1A8FE3;
             margin-top: 40px;
         }
 
         footer a {
-            color: #F5A623;
+            color: #1A8FE3;
             text-decoration: none;
         }
 
@@ -185,8 +193,10 @@
 </head>
 <body>
     <header>
+        <!-- Header logo image — upload header.png to this folder to display it -->
+        <!-- <img src="header.png" alt="AlphaReads" class="header-logo"> -->
         <h1>🎙️ AlphaReads</h1>
-        <p>Financial & Self-Help Audiobooks</p>
+        <p>Financial &amp; Self-Help Audiobooks</p>
         <p style="font-size: 0.9em; margin-top: 10px; color: #AAAAAA;">📚 Listen to summaries | 📈 Build wealth | 💡 Learn better</p>
     </header>
 
