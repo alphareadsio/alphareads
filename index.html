@@ -53,8 +53,10 @@
             background: #1a1a2e;
             border: 1px solid #F5A623;
             border-radius: 12px;
-            padding: 20px;
+            overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
         .book-card:hover {
@@ -62,23 +64,55 @@
             box-shadow: 0 10px 30px rgba(245, 166, 35, 0.2);
         }
 
-        .book-title {
-            font-size: 1.4em;
+        .book-cover {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #2a2a3e, #0A0A0F);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid #F5A623;
+        }
+
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .book-cover-placeholder {
+            font-size: 5em;
             color: #F5A623;
-            margin-bottom: 8px;
+            opacity: 0.5;
+        }
+
+        .book-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-title {
+            font-size: 1.2em;
+            color: #F5A623;
+            margin-bottom: 6px;
+            font-weight: 700;
         }
 
         .book-author {
             color: #AAAAAA;
-            font-size: 0.95em;
-            margin-bottom: 15px;
+            font-size: 0.9em;
+            margin-bottom: 12px;
         }
 
         .book-description {
             color: #DDDDDD;
-            font-size: 0.9em;
+            font-size: 0.85em;
             margin-bottom: 20px;
             line-height: 1.5;
+            flex: 1;
         }
 
         .audio-player {
@@ -163,7 +197,8 @@
                 author: "Saifedean Ammous",
                 description: "Understand why Bitcoin is digital money for the modern age. A deep dive into monetary history and economics.",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                amazonUrl: "https://amzn.to/4sCFJ4C"
+                amazonUrl: "https://amzn.to/4sCFJ4C",
+                coverUrl: "https://covers.openlibrary.org/b/id/10407076-M.jpg"
             },
             {
                 id: 2,
@@ -171,15 +206,17 @@
                 author: "Robert Kiyosaki",
                 description: "The classic guide to building wealth and financial independence through real estate and entrepreneurship.",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-                amazonUrl: "https://amzn.to/4s0FBeb"
+                amazonUrl: "https://amzn.to/4s0FBeb",
+                coverUrl: "https://covers.openlibrary.org/b/id/8239141-M.jpg"
             },
             {
                 id: 3,
                 title: "The DeFi Revolution",
-                author: "Various Authors",
+                author: "Camila Russo",
                 description: "Explore decentralized finance and how blockchain is transforming traditional banking and investing.",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-                amazonUrl: "https://amzn.to/4tctJqo"
+                amazonUrl: "https://amzn.to/4tctJqo",
+                coverUrl: "https://covers.openlibrary.org/b/id/11225435-M.jpg"
             },
             {
                 id: 4,
@@ -187,7 +224,8 @@
                 author: "Benjamin Graham",
                 description: "The definitive guide to value investing. Learn the principles that made Warren Buffett a billionaire.",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
-                amazonUrl: "https://www.amazon.com/dp/0060555661?tag=alphareadsio-20"
+                amazonUrl: "https://www.amazon.com/dp/0060555661?tag=alphareadsio-20",
+                coverUrl: "https://covers.openlibrary.org/b/id/7742435-M.jpg"
             },
             {
                 id: 5,
@@ -195,7 +233,8 @@
                 author: "James Clear",
                 description: "Transform your life with tiny, incremental changes. The science of habit formation and personal growth.",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
-                amazonUrl: "https://www.amazon.com/dp/0735211299?tag=alphareadsio-20"
+                amazonUrl: "https://www.amazon.com/dp/0735211299?tag=alphareadsio-20",
+                coverUrl: "https://covers.openlibrary.org/b/id/8378263-M.jpg"
             },
             {
                 id: 6,
@@ -203,7 +242,8 @@
                 author: "Morgan Housel",
                 description: "Learn how psychology drives financial decisions. Understand yourself and others better with money.",
                 audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
-                amazonUrl: "https://www.amazon.com/dp/0857197681?tag=alphareadsio-20"
+                amazonUrl: "https://www.amazon.com/dp/0857197681?tag=alphareadsio-20",
+                coverUrl: "https://covers.openlibrary.org/b/id/8394265-M.jpg"
             }
         ];
 
@@ -211,21 +251,26 @@
             const grid = document.getElementById('booksGrid');
             grid.innerHTML = books.map(book => `
                 <div class="book-card">
-                    <h2 class="book-title">${book.title}</h2>
-                    <p class="book-author">by ${book.author}</p>
-                    <p class="book-description">${book.description}</p>
-                    
-                    <div class="audio-player">
-                        <audio controls>
-                            <source src="${book.audioUrl}" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
+                    <div class="book-cover">
+                        <img src="${book.coverUrl}" alt="${book.title}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'book-cover-placeholder\\'>📚</div>'">
                     </div>
+                    <div class="book-content">
+                        <h2 class="book-title">${book.title}</h2>
+                        <p class="book-author">by ${book.author}</p>
+                        <p class="book-description">${book.description}</p>
+                        
+                        <div class="audio-player">
+                            <audio controls>
+                                <source src="${book.audioUrl}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
 
-                    <div class="buttons">
-                        <button class="btn btn-amazon" onclick="window.open('${book.amazonUrl}', '_blank')">
-                            📖 Buy on Amazon
-                        </button>
+                        <div class="buttons">
+                            <button class="btn btn-amazon" onclick="window.open('${book.amazonUrl}', '_blank')">
+                                📖 Buy on Amazon
+                            </button>
+                        </div>
                     </div>
                 </div>
             `).join('');
