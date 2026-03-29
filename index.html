@@ -166,6 +166,19 @@
             transform: scale(1.05);
         }
 
+        .btn-audio {
+            background: #1a1a2e;
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .btn-audio:hover {
+            background: #2a2a3e;
+            transform: scale(1.02);
+        }
+
         footer {
             background: #1a1a2e;
             padding: 20px;
@@ -288,10 +301,9 @@
                         <p class="book-author">by ${book.author}</p>
                         <p class="book-description">${book.description}</p>
                         <div class="audio-player">
-                            <audio controls onclick="event.stopPropagation(); if(event.target.paused) event.target.play(); else goToBook(${book.id});">
-                                <source src="${book.audioUrl}" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
+                            <button class="btn btn-audio" onclick="event.stopPropagation(); goToBook(${book.id})">
+                                🎧 Podcast Summary
+                            </button>
                         </div>
                         <div class="buttons" onclick="event.stopPropagation()">
                             <button class="btn btn-read-more" onclick="goToBook(${book.id})">
