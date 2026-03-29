@@ -205,10 +205,11 @@
         .soundbar {
             display: none;
             align-items: center;
-            justify-content: center;
-            gap: 4px;
+            justify-content: space-between;
+            gap: 2px;
             height: 30px;
             margin-bottom: 10px;
+            width: 100%;
         }
 
         .soundbar.active {
@@ -216,7 +217,7 @@
         }
 
         .soundbar-bar {
-            width: 3px;
+            flex: 1;
             height: 12px;
             background: linear-gradient(to top, #1A8FE3, #00D4FF);
             border-radius: 2px;
