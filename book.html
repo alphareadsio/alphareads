@@ -111,6 +111,42 @@
             height: 50px;
         }
 
+        .soundbar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            height: 40px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .soundbar-container.active {
+            display: flex;
+        }
+
+        .soundbar-bar {
+            width: 8px;
+            height: 20px;
+            background: #1A8FE3;
+            border-radius: 4px;
+            animation: soundwave 0.6s ease-in-out infinite;
+        }
+
+        .soundbar-bar:nth-child(2) {
+            animation-delay: 0.1s;
+            height: 30px;
+        }
+
+        .soundbar-bar:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes soundwave {
+            0%, 100% { height: 20px; }
+            50% { height: 35px; }
+        }
+
         .buttons {
             display: flex;
             flex-direction: column;
@@ -225,6 +261,11 @@
 
                 <div class="audio-player">
                     <h3>🎧 Podcast Summary</h3>
+                    <div class="soundbar-container" id="soundbar">
+                        <div class="soundbar-bar"></div>
+                        <div class="soundbar-bar"></div>
+                        <div class="soundbar-bar"></div>
+                    </div>
                     <audio id="audioPlayer" controls>
                         <source src="" type="audio/mpeg">
                         Your browser does not support the audio element.
@@ -371,7 +412,24 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadBook);
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBook();
+
+            const audioPlayer = document.getElementById('audioPlayer');
+            const soundbar = document.getElementById('soundbar');
+
+            audioPlayer.addEventListener('play', function() {
+                soundbar.classList.add('active');
+            });
+
+            audioPlayer.addEventListener('pause', function() {
+                soundbar.classList.remove('active');
+            });
+
+            audioPlayer.addEventListener('ended', function() {
+                soundbar.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>
