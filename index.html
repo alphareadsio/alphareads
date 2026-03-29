@@ -65,6 +65,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
         }
 
         .book-card:hover {
@@ -278,7 +279,7 @@
         function renderBooks() {
             const container = document.getElementById('booksContainer');
             container.innerHTML = books.map(book => `
-                <div class="book-card">
+                <div class="book-card" onclick="goToBook(${book.id})">
                     <div class="book-cover">
                         <img src="${book.coverUrl}" alt="${book.title}" onerror="this.src='https://via.placeholder.com/200x300?text=${encodeURIComponent(book.title)}'">
                     </div>
@@ -287,14 +288,14 @@
                         <p class="book-author">by ${book.author}</p>
                         <p class="book-description">${book.description}</p>
                         <div class="audio-player">
-                            <audio controls>
+                            <audio controls onclick="event.stopPropagation()">
                                 <source src="${book.audioUrl}" type="audio/mpeg">
                                 Your browser does not support the audio element.
                             </audio>
                         </div>
-                        <div class="buttons">
-                            <button class="btn btn-read-more" onclick="goToBook(${book.id})">
-                                📖 Read More
+                        <div class="buttons" onclick="event.stopPropagation()">
+                            <button class="btn btn-read-more">
+                                Click Here For Summary
                             </button>
                             <button class="btn btn-amazon" onclick="window.open('${book.amazonUrl}', '_blank')">
                                 💳 $0.00 With Free Audible Trial
